@@ -20,45 +20,34 @@ class APRegistration(unittest.TestCase):
     def setUp(self):
         self.driver = webdriver.Firefox()
         self.driver.get('http://automationpractice.com')
-        #self.driver.maximize_window()
-
+        self.driver.implicitly_wait(10)
     #wlasciwe testy
     def testCorrectRegitration(self):
         #odnajdz i kliknij sign in ,
         driver=self.driver
-        sign_in=driver.find_element_by_class_name('login')
-        sign_in.click()
-        sleep(5)
-        email_input=driver.find_element_by_id('email_create')
-        email_input.send_keys(email)
-        create_btn=driver.find_element_by_id('SubmitCreate')
-        create_btn.click()
-        sleep(5)
+        driver.find_element_by_class_name('login').click()
 
-        account_name=driver.find_element_by_id('customer_firstname')
-        account_name.send_keys('namecc')
+        driver.find_element_by_id('email_create').send_keys(email)
+
+        driver.find_element_by_id('SubmitCreate').click()
+
+        driver.find_element_by_id('customer_firstname').send_keys('namecc')
 
         driver.find_element_by_id('id_gender1').click()
 
-        account_last_name=driver.find_element_by_id('customer_lastname')
-        account_last_name.send_keys('lasname')
+        driver.find_element_by_id('customer_lastname').send_keys('lasname')
 
         email_text=driver.find_element_by_id('email').get_attribute('value')
         assert email_text == email
 
-        passwd=driver.find_element_by_id('passwd')
-        passwd.send_keys('haslo')
+        driver.find_element_by_id('passwd').send_keys('haslo')
 
+        Select(driver.find_element_by_id('days')).select_by_value(birthday)
 
+        Select(driver.find_element_by_id('months')).select_by_value(birthmonth)
 
-        day_of_birth_select=Select(driver.find_element_by_id('days'))
-        day_of_birth_select.select_by_value(birthday)
+        Select(driver.find_element_by_id('years')).select_by_value(birthyear)
 
-        month_of_birth_select=Select(driver.find_element_by_id('months'))
-        month_of_birth_select.select_by_value(birthmonth)
-
-        year_of_birth_select=Select(driver.find_element_by_id('years'))
-        year_of_birth_select.select_by_value(birthyear)
 
 
         sleep(10)
