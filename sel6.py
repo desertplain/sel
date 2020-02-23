@@ -61,6 +61,7 @@ class WizRegistration(unittest.TestCase):
         pole8="//div[@class='register-form__country-container__locations']"
         pole9="label"
         check1='//label[@for="registration-privacy-policy-checkbox"][@class="rf-checkbox__label"]'
+        button_sign8='//button[@data-test="booking-register-submit"]'
 
         wait_onweb.until(EC.element_to_be_clickable((By.XPATH,button_sign1))).click()
         wait_onweb.until(EC.element_to_be_clickable((By.XPATH,button_sign2))).click()
@@ -106,6 +107,9 @@ class WizRegistration(unittest.TestCase):
                 break
 
         dr.find_element_by_xpath(check1).click()
+
+        dr.find_element_by_xpath(button_sign8).click()
+
         #dr.find_element_by_xpath(pole7).send_keys(nar)
 
         #dr.find_element_by_name(pole3).send_keys(kod_kraju)
